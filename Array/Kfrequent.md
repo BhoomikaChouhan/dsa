@@ -58,3 +58,68 @@ Maan lo `nums` = [1, 1, 1, 2, 2, 3] aur `k` = 2, to yeh code kya karega:
 - `bucket` array kuch aisa dikhega: [[], [3], [2], [1], [], [], ...].
 - `res` list ban jayegi [1, 2] kyunki 1 aur 2 sabse zyada frequent elements hain.
 
+### Dry Run
+
+Bilkul, ek dry run karte hain. Maan lo humare paas `nums` = [1, 1, 1, 2, 2, 3] aur `k` = 2.
+
+### Step-by-Step Dry Run:
+
+1. **Initialization**:
+   ```java
+   List<Integer>[] bucket = new List[nums.length + 1];  // bucket = [null, null, null, null, null, null, null]
+   Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();  // frequencyMap = {}
+   ```
+
+2. **Frequency Count**:
+   ```java
+   for (int n : nums) {
+       frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+   }
+   ```
+   - `n = 1`: frequencyMap = {1=1}
+   - `n = 1`: frequencyMap = {1=2}
+   - `n = 1`: frequencyMap = {1=3}
+   - `n = 2`: frequencyMap = {1=3, 2=1}
+   - `n = 2`: frequencyMap = {1=3, 2=2}
+   - `n = 3`: frequencyMap = {1=3, 2=2, 3=1}
+
+3. **Bucket Filling**:
+   ```java
+   for (int key : frequencyMap.keySet()) {
+       int frequency = frequencyMap.get(key);
+       if (bucket[frequency] == null) {
+           bucket[frequency] = new ArrayList<>();
+       }
+       bucket[frequency].add(key);
+   }
+   ```
+   - `key = 1`: frequency = 3, bucket[3] = [1]  // bucket = [null, null, null, [1], null, null, null]
+   - `key = 2`: frequency = 2, bucket[2] = [2]  // bucket = [null, null, [2], [1], null, null, null]
+   - `key = 3`: frequency = 1, bucket[1] = [3]  // bucket = [null, [3], [2], [1], null, null, null]
+
+4. **Result Compilation**:
+   ```java
+   List<Integer> res = new ArrayList<>();
+   
+   for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
+       if (bucket[pos] != null) {
+           res.addAll(bucket[pos]);
+       }
+   }
+   ```
+   - `pos = 6`: bucket[6] = null, res = []
+   - `pos = 5`: bucket[5] = null, res = []
+   - `pos = 4`: bucket[4] = null, res = []
+   - `pos = 3`: bucket[3] = [1], res = [1]  // bucket[3] ka element res mein add kar diya
+   - `pos = 2`: bucket[2] = [2], res = [1, 2]  // bucket[2] ka element res mein add kar diya
+   - Ab res.size() = 2 (which is k), to loop stop ho jayega
+
+5. **Return Result**:
+   ```java
+   return res;  // res = [1, 2]
+   ```
+
+### Result:
+`res` list ka result hoga `[1, 2]`, jo top 2 frequent elements hain `nums` array mein.
+
+Umeed hai ab tumhe pura code aur uska kaam samajh aa gaya hoga! Agar kuch aur doubt ho to zarur poocho!
