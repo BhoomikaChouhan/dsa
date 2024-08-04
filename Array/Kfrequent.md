@@ -58,6 +58,21 @@ Maan lo `nums` = [1, 1, 1, 2, 2, 3] aur `k` = 2, to yeh code kya karega:
 - `bucket` array kuch aisa dikhega: [[], [3], [2], [1], [], [], ...].
 - `res` list ban jayegi [1, 2] kyunki 1 aur 2 sabse zyada frequent elements hain.
 
+
+### Time Complexity:
+Yeh code overall `O(n)` time leta hai jahan `n` array `nums` ka length hai. Yeh kuch is tarah se breakdown hota hai:
+- Frequency count karne ke liye `O(n)`.
+- Frequency map se elements bucket mein daalne ke liye `O(n)`.
+- Bucket array ko reverse order mein iterate karne ke liye `O(n)`.
+
+### Space Complexity:
+Space complexity `O(n)` hai kyunki hum `frequencyMap` aur `bucket` array use kar rahe hain jo maximum `n` size le sakte hain.
+
+Ek line mein:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)`
+
+
 ### Dry Run
 
 Bilkul, ek dry run karte hain. Maan lo humare paas `nums` = [1, 1, 1, 2, 2, 3] aur `k` = 2.
