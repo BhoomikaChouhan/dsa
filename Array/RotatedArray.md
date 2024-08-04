@@ -96,6 +96,24 @@ public int search(int[] a, int tar) {
   - Agar target `a[s]` se chhota hai, binary search `Bs` ko right half (pivot se end tak) call karta hai.
 - Agar target nahi milta, -1 return karta hai.
 
+### Time Complexity:
+- **`getPivot` function**: Iski time complexity O(log n) hai kyunki yeh binary search ka use karta hai.
+- **`Bs` (Binary Search) function**: Iski time complexity bhi O(log n) hai.
+- **Overall `search` function**: Kyunki yeh do binary searches use karta hai (ek pivot find karne ke liye aur ek target search karne ke liye), total time complexity O(log n) hoti hai.
+
+### Space Complexity:
+- Sabhi functions constant extra space use karte hain (i.e., O(1)), kyunki yeh iterative solutions hain aur koi extra data structures use nahi karte.
+
+Toh overall, is solution ki:
+- **Time Complexity**: O(log n)
+- **Space Complexity**: O(1)
+
+---
+
+### Simplified Summary:
+1. **Time Complexity**: O(log n)
+2. **Space Complexity**: O(1)
+
 ### Dry Run Example:
 
 Maan lo `a` = [4, 5, 6, 7, 0, 1, 2] aur `tar` = 0.
