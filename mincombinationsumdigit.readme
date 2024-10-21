@@ -1,0 +1,57 @@
+Ye solution kaafi sahi hai, aur efficient bhi. Main point ye hai ki hum **PriorityQueue** ka use kar rahe hain, jo har waqt array ke smallest element ko upar laata hai (min-heap ka behavior), taki hum chhoti values ko pehle use karke do numbers bana sakein. Chalo isko step-by-step samajhte hain:
+
+### Samjhane ka tareeqa:
+1. **PriorityQueue ka use**:
+   - `PriorityQueue` ek min-heap hoti hai, jo humesha smallest element ko top pe rakhti hai. Isse fayda ye hota hai ki hum array ko explicitly sort kiye bina, hum smallest element ko har step mein access kar sakte hain.
+
+2. **Do numbers `a` aur `b` ka banana**:
+   - Humko array ke elements ko use karke do numbers banana hain, jinka sum minimum ho. Jaise hi humko sabse chhoti value milti hai, hum usko pehle number mein daalte hain (`a` mein). Phir next smallest ko doosre number (`b`) mein daalte hain.
+   - Ye alternating pattern follow karte hain: ek baar `a` mein daalte hain, phir doosri chhoti value ko `b` mein.
+
+3. **Har iteration mein kya hota hai**:
+   - Jab tak priority queue mein elements bache hain:
+     - Pehla smallest element nikal kar `a` mein daal do.
+     - Phir agla smallest element `b` mein daal do.
+     - Iska fayda ye hai ki `a` aur `b` dono ko alternating digits milte hain, jo unka final sum minimize karta hai.
+
+4. **Multiplying by 10**:
+   - Jab bhi hum koi digit add karte hain, hum existing number ko 10 se multiply karte hain taki naye digit ko correct place pe daala ja sake. For example:
+     - Agar `a` = 5 hai, aur agla digit 3 mila hai, toh `a = 5 * 10 + 3` hoga, yaani 53 banega.
+     - Same logic `b` ke liye bhi follow hota hai.
+
+### Example:
+
+Suppose input array hai:
+```
+[5, 3, 0, 7, 2, 1]
+```
+
+1. **PriorityQueue mein daalne ke baad**: PriorityQueue is sorted as:
+   ```
+   [0, 1, 2, 3, 5, 7]
+   ```
+
+2. **Building Numbers**:
+   - `a` starts as 0, `b` starts as 0.
+   - Sabse pehle `0` nikal kar `a` mein daalenge, `a = 0`
+   - Next, `1` ko `b` mein daalenge, `b = 1`
+   - Phir `2` ko `a` mein daalenge, `a = 0 * 10 + 2 = 2`
+   - Phir `3` ko `b` mein daalenge, `b = 1 * 10 + 3 = 13`
+   - Phir `5` ko `a` mein daalenge, `a = 2 * 10 + 5 = 25`
+   - Lastly, `7` ko `b` mein daalenge, `b = 13 * 10 + 7 = 137`
+
+3. **Final Sum**:
+   - `a` = 25
+   - `b` = 137
+   - Sum = `a + b = 25 + 137 = 162`
+
+Is tarah se hum minimum sum achieve karte hain.
+
+### Time Complexity:
+- **Priority Queue mein element insert karne ka time**: `O(n log n)` hota hai, kyunki har insertion log time leta hai.
+- **Final sum banane mein**: `O(n)` kyunki hum har element ko ek baar process karte hain.
+
+Total time complexity: **O(n log n)**
+
+### Conclusion:
+Ye solution correct hai kyunki hum smallest digits ko alternately `a` aur `b` mein daalte hain, jis se minimum sum ban jaata hai.
